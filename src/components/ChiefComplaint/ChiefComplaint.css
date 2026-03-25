@@ -1,0 +1,80 @@
+/* ============================================================
+   CHIEF COMPLAINT COMPONENT STYLES
+   Numbered list input rows with keyboard hints
+   ============================================================ */
+
+.chief-complaint {
+  /* no extra wrapper styles needed — sits inside a .card */
+}
+
+.chief-complaint__list {
+  border: 1px solid #ddd5c8;
+  border-radius: 8px;
+  background: #faf8f4;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chief-complaint__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chief-complaint__number {
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  min-width: 20px;
+}
+
+.chief-complaint__input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  padding: 4px 0;
+  outline: none;
+  color: #1a1a1a;
+}
+
+.chief-complaint__input::placeholder {
+  color: #aaa;
+}
+
+.chief-complaint__hint {
+  font-size: 12px;
+  color: #888;
+  margin-top: 8px;
+}
+
+/* ✕ delete button on each complaint row */
+.chief-complaint__delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #b94040;
+  font-size: 13px;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 50%;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.chief-complaint__delete:hover {
+  background: #fde8e8;
+  color: #c0392b;
+}
+
+/* Keyboard key badges */
+kbd {
+  background: #e8e2da;
+  border: 1px solid #c5bdb2;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 11px;
+  font-family: inherit;
+}

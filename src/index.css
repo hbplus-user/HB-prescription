@@ -1,0 +1,137 @@
+/* ============================================================
+   GLOBAL RESET & ROOT VARIABLES
+   Sets colour palette, fonts, and base element resets
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-page: #f0ebe3;          /* warm beige page background */
+  --bg-card: #f5f1ea;          /* slightly lighter card background */
+  --bg-dark: #2c3e50;          /* dark navy used for physician header */
+  --accent-red: #8b2e2e;       /* dark red used for section labels */
+  --accent-orange: #b94a2c;    /* orange-red for headings & buttons */
+  --btn-primary: #8b2e1a;      /* primary CTA button colour */
+  --text-dark: #1a1a1a;
+  --text-mid: #444;
+  --text-light: #888;
+  --border: #ddd5c8;
+  --border-focus: #b94a2c;
+  --input-bg: #faf8f4;
+  --radius: 8px;
+  --shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-dark);
+  min-height: 100vh;
+  padding: 24px 16px 60px;
+}
+
+/* ============================================================
+   SHARED INPUT / SELECT / TEXTAREA STYLES
+   ============================================================ */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-dark);
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--border-focus);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ============================================================
+   LABEL STYLE — uppercase section headings inside cards
+   ============================================================ */
+.field-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-red);
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* ============================================================
+   CARD — rounded card wrapping each form section
+   ============================================================ */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+
+/* full-width text inputs and textareas */
+.full-width {
+  width: 100%;
+}
+
+/* ============================================================
+   BUTTON styles
+   ============================================================ */
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--btn-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover { opacity: 0.88; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-dark);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.2s;
+}
+
+.btn-outline:hover { border-color: var(--accent-orange); }

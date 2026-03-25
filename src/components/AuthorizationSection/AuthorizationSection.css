@@ -1,0 +1,110 @@
+/* ============================================================
+   AUTHORIZATION SECTION STYLES
+   The bottom card: physician signature, date, client ack.
+   Three columns evenly spaced and vertically aligned.
+   ============================================================ */
+
+/* sits inside a .card — no extra wrapper styles needed */
+
+/* ── Main row: 3 evenly-spaced columns ── */
+.authorization-section__row {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+  align-items: flex-start;
+}
+
+/* Each column takes equal space */
+.authorization-section__col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Column labels */
+.authorization-section__col-label {
+  font-weight: 600;
+  font-size: 13px;
+  color: #1a1a1a;
+}
+
+.authorization-section__col-label--orange {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b94a2c;
+}
+
+/* Container for the signature area */
+.authorization-section__sig-box {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+/* Auto-filled physician signature image */
+.authorization-section__sig-img {
+  height: 50px;
+  max-width: 100%;
+  object-fit: contain;
+  border: 1.5px solid #ddd5c8;
+  border-radius: 8px;
+  background: #faf8f4;
+  padding: 4px 8px;
+}
+
+/* Placeholder text when no physician is selected */
+.authorization-section__sig-placeholder {
+  font-size: 12px;
+  color: #999;
+  font-style: italic;
+  padding: 8px 0;
+}
+
+/* Date field — calendar picker */
+.authorization-section__date {
+  background: #ede9e2;
+  border: 1px solid #ddd5c8;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: #444;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Signature line for client acknowledgement */
+.authorization-section__signature-line {
+  border-bottom: 1.5px solid #888;
+  padding-bottom: 4px;
+  min-height: 30px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.authorization-section__signature-input {
+  border: none !important;
+  background: transparent !important;
+  outline: none;
+  width: 100%;
+  font-size: 15px;
+  padding: 2px 0;
+}
+
+/* Disclaimer text at the very bottom */
+.authorization-section__disclaimer {
+  font-size: 12px;
+  color: #b94a2c;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e0d9cf;
+  line-height: 1.6;
+}
+
+.authorization-section__disclaimer a {
+  color: inherit;
+  text-decoration: underline;
+}

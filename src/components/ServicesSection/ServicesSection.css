@@ -1,0 +1,90 @@
+/* ============================================================
+   HB+ SERVICES SECTION STYLES
+   Checkbox rows for each prescribed service with inline inputs
+   ============================================================ */
+
+/* sits inside a .card — no extra wrapper styles needed */
+
+.service-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  border: 1px solid #e0d9cf;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  background: #faf8f4;
+}
+
+.service-row__checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #8b2e1a;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.service-row__name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a1a1a;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Fields container: takes all remaining space after checkbox + name */
+.service-row__fields {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.service-row__fields label {
+  font-size: 13px;
+  color: #555;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* All inputs inside service rows: comfortable sizing, no fixed tiny widths */
+.service-row__fields input[type="text"] {
+  font-size: 13px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd5c8;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.service-row__fields input[type="text"]:focus {
+  outline: none;
+  border-color: #b94a2c;
+  box-shadow: 0 0 0 2px rgba(185, 74, 44, 0.12);
+}
+
+/* Size variants — use min-width + flex to fill available space smoothly */
+.service-row__small-input {
+  min-width: 60px;
+  width: 80px;
+  flex: 0 1 80px;
+}
+
+.service-row__medium-input {
+  min-width: 100px;
+  flex: 1 1 140px;
+}
+
+.service-row__large-input {
+  min-width: 120px;
+  flex: 1 1 200px;
+}
+
+.service-row__unit {
+  font-size: 13px;
+  color: #555;
+  flex-shrink: 0;
+}

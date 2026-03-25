@@ -1,0 +1,320 @@
+/* ============================================================
+   PREVIEW MODAL STYLES
+   Matches the reference design with left accent bars, card
+   sections, and clean cream/beige layout.
+   ============================================================ */
+
+/* ── Overlay ── */
+.preview-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  overflow-y: auto;
+  animation: previewFadeIn 0.2s ease;
+}
+
+@keyframes previewFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Main content card ── */
+.preview-content {
+  background: #f5f1ea;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 720px;
+  padding: 40px 44px 32px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+  position: relative;
+  color: #1a1a1a;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── Close button ── */
+.preview-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #ede9e2;
+  border: 1px solid #ddd5c8;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: background 0.15s;
+  z-index: 10;
+}
+.preview-close:hover {
+  background: #e0d9cf;
+  color: #1a1a1a;
+}
+
+/* ── Header ── */
+.preview-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.preview-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 6px;
+}
+.preview-header p {
+  font-size: 12px;
+  color: #777;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SECTION CARDS — cream bg, rounded, with left accent bar
+   ═══════════════════════════════════════════════════════════ */
+.pv-card {
+  background: #faf8f4;
+  border: 1px solid #e8e2da;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+  border-left: 4px solid #b94a2c;
+}
+
+.pv-card--dark {
+  background: #2c3e50;
+  border-color: #3d5166;
+  border-left-color: #f0c080;
+  color: #e0e8f0;
+}
+
+.pv-card-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin: 0 0 12px;
+}
+
+.pv-card--dark .pv-card-title {
+  color: #f0c080;
+}
+
+/* ── Field rows ── */
+.pv-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+
+.pv-field {
+  display: flex;
+  gap: 6px;
+  min-width: 0;
+}
+
+.pv-field .lbl {
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pv-card--dark .pv-field .lbl {
+  color: #98b0c4;
+}
+
+.pv-field .val {
+  color: #1a1a1a;
+  font-size: 13px;
+}
+
+.pv-card--dark .pv-field .val {
+  color: #e0e8f0;
+}
+
+/* Half-width fields for 2-column grids */
+.pv-field--half {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ── Numbered list ── */
+.pv-list {
+  padding-left: 18px;
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #1a1a1a;
+}
+.pv-list li {
+  margin-bottom: 2px;
+}
+
+/* ── Services table ── */
+.pv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-top: 8px;
+}
+.pv-table th,
+.pv-table td {
+  border: 1px solid #e0d9cf;
+  padding: 6px 10px;
+  text-align: left;
+}
+.pv-table th {
+  background: #f0ebe3;
+  font-weight: 600;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #555;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   30-DAY TARGETS — 3-column bordered grid
+   ═══════════════════════════════════════════════════════════ */
+.pv-targets-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin: 0 0 8px;
+}
+
+.pv-targets {
+  display: flex;
+  border: 1px solid #e0d9cf;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.pv-target-col {
+  flex: 1;
+  padding: 12px 16px;
+  border-right: 1px solid #e0d9cf;
+  background: #faf8f4;
+}
+.pv-target-col:last-child {
+  border-right: none;
+}
+.pv-target-col .lbl {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #b94a2c;
+  margin-bottom: 6px;
+}
+.pv-target-col .val {
+  font-size: 13px;
+  color: #1a1a1a;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   AUTHORIZATION ROW
+   ═══════════════════════════════════════════════════════════ */
+.pv-auth {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 20px;
+  padding-top: 12px;
+  border-top: 1px solid #e0d9cf;
+}
+
+.pv-auth-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.pv-auth-col .lbl {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.pv-auth-col .val {
+  font-size: 14px;
+  color: #1a1a1a;
+  min-height: 20px;
+}
+
+.pv-sig-img {
+  height: 50px;
+  width: 140px;
+  object-fit: contain;
+}
+
+.pv-ack-line {
+  border-bottom: 1px solid #888;
+  min-width: 140px;
+  height: 20px;
+}
+
+/* ── Disclaimer ── */
+.pv-disclaimer {
+  font-size: 10px;
+  color: #b94a2c;
+  line-height: 1.6;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #e0d9cf;
+  font-style: italic;
+  text-align: center;
+}
+
+/* ── HB+ Logo Footer — bottom-right corner ── */
+.pv-logo-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.pv-logo-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.pv-logo-text {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+/* ── Action bar ── */
+.preview-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid #e0d9cf;
+}

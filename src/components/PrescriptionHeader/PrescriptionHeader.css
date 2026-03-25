@@ -1,0 +1,88 @@
+/* ============================================================
+   PRESCRIPTION HEADER STYLES
+   The white card showing "HB+ Wellness Prescription",
+   clinic info, date, consultation #, and next visit.
+   ============================================================ */
+
+.prescription-header {
+  background: #fff;
+  border: 1px solid #ddd5c8;
+  border-radius: 12px;
+  padding: 20px 28px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+
+.prescription-header__title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+
+.prescription-header__subtitle {
+  font-size: 13px;
+  color: #666;
+}
+
+/* Right side: date, consultation #, next visit */
+.prescription-header__right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 200px;
+}
+
+.prescription-header__meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  font-size: 13px;
+  color: #444;
+}
+
+.prescription-header__meta-row strong {
+  color: #1a1a1a;
+}
+
+.prescription-header__meta-row input {
+  width: 90px;
+  text-align: center;
+  padding: 4px 8px;
+  font-size: 13px;
+}
+
+/* Calendar date picker */
+.prescription-header__date-input {
+  width: 140px !important;
+  cursor: pointer;
+  border: 1px solid #ddd5c8;
+  border-radius: 6px;
+  padding: 4px 8px !important;
+  font-size: 13px;
+  color: #1a1a1a;
+  background: #faf8f4;
+}
+
+/* Auto-generated consultation number badge */
+.prescription-header__consult-num {
+  color: #c0692d;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.prescription-header__next {
+  font-size: 13px;
+  color: #444;
+}
+
+.prescription-header__next strong {
+  color: #1a1a1a;
+}

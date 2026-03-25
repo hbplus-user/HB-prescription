@@ -1,0 +1,50 @@
+/* ============================================================
+   App.css — Layout styles for the main form container
+   ============================================================ */
+
+/* Centred narrow column — mimics a paper form */
+.app-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Row layout helper: places children side by side with a gap */
+.field-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Column inside a .field-row */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Dark-navy card variant used for Contraindications */
+.card--dark {
+  background: #2c3e50;
+  border-color: #3d5166;
+}
+
+.card--dark .field-label--light {
+  color: #f0c080;
+}
+
+/* The textarea inside dark card — dark background */
+.contraindications-textarea {
+  background: #344a5c !important;
+  border-color: #4a6070 !important;
+  color: #e0e8f0 !important;
+  min-height: 90px;
+}
+
+/* Form action buttons row (Preview + Generate) */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+  padding-bottom: 40px;
+}

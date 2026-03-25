@@ -1,0 +1,133 @@
+/* ============================================================
+   PHYSICIAN HEADER COMPONENT STYLES
+   Dark navy header where physician name, reg #, and
+   specialisation are displayed at the top of the form.
+
+   LAYOUT (collapsed = false):
+   [ 👤 PRESCRIBING PHYSICIAN ]  [ Full Name ▼ ] [ Reg # ▼ ] [ Specialisation ] [ ▲ ]
+
+   When collapsed, only the title row shows and the three
+   field columns are hidden; the arrow flips to ▼.
+   ============================================================ */
+
+/* Outer container — single flex row so title + fields stay on one line */
+.physician-header {
+  background: #2c3e50;
+  border-radius: 12px;
+  padding: 16px 24px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;         /* vertically centre everything */
+  gap: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  flex-wrap: wrap;
+}
+
+/* ── Left: icon + "PRESCRIBING PHYSICIAN" label ── */
+.physician-header__title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;              /* never compress the label */
+  min-width: 170px;
+}
+
+.physician-header__title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f0c080;              /* golden-orange */
+}
+
+/* ── Middle: three field columns in a row ── */
+/* Grows to fill space between the label and the collapse button */
+.physician-header__fields {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: flex-end;       /* labels above, inputs aligned at bottom */
+}
+
+/* Each column: label on top, input below */
+.physician-header__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 140px;
+}
+
+.physician-header__field label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8fa8c0;
+}
+
+/* Shared style for the selects and readonly inputs */
+.physician-header__field select,
+.physician-header__field input {
+  background: #3d5166;
+  border: 1.5px solid #b94a2c;
+  border-radius: 6px;
+  color: #fff;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  width: 100%;
+}
+
+.physician-header__field select option {
+  background: #2c3e50;
+}
+
+/* Readonly auto-filled fields get a muted border and lighter text */
+.physician-header__field input[readonly] {
+  border-color: #4a6070;
+  background: #344a5c;
+  color: #8fa8c0;
+  cursor: default;
+}
+
+/* ── Right: collapse / expand arrow ── */
+.physician-header__collapse {
+  background: transparent;
+  border: none;
+  color: #8fa8c0;
+  font-size: 16px;
+  padding: 0 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+  align-self: flex-start;     /* pin to top-right */
+  margin-top: 2px;
+}
+
+.physician-header__collapse:hover {
+  color: #f0c080;
+}
+
+/* ── Signature preview column ── */
+.physician-header__field--sig {
+  min-width: 160px;
+  max-width: 200px;
+}
+
+.physician-header__sig-img {
+  height: 50px;
+  width: 160px;
+  object-fit: contain;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid #4a6070;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+.physician-header__sig-placeholder {
+  color: #4a6070;
+  font-size: 18px;
+  line-height: 50px;
+  padding-left: 8px;
+}
