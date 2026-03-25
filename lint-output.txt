@@ -1,0 +1,6 @@
+﻿
+C:\Users\SUBIT KUMAR PRADHAN\OneDrive\Desktop\Antigravity\Doctor prescription\src\App.tsx
+  136:14  error  'err' is defined but never used  @typescript-eslint/no-unused-vars
+
+Γ£û 1 problem (1 error, 0 warnings)
+

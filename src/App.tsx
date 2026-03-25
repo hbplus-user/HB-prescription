@@ -10,17 +10,18 @@
 //   - Generate PDF: captures the preview via html2canvas + jsPDF
 // ============================================================
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import type { PrescriptionFormData } from './types/prescription';
+import type { PrescriptionFormData, Physician } from './types/prescription';
 import PhysicianHeader from './components/PhysicianHeader/PhysicianHeader';
 import PrescriptionHeader from './components/PrescriptionHeader/PrescriptionHeader';
 import ChiefComplaint from './components/ChiefComplaint/ChiefComplaint';
 import ServicesSection from './components/ServicesSection/ServicesSection';
 import AuthorizationSection from './components/AuthorizationSection/AuthorizationSection';
 import PreviewModal from './components/PreviewModal/PreviewModal';
-import { PRIMARY_CONDITIONS, PHYSICIANS } from './data/physicians';
+import { PRIMARY_CONDITIONS } from './data/physicians';
 import html2canvas from 'html2canvas';
+import { fetchPhysicians, savePrescription } from './lib/prescriptionService';
 import jsPDF from 'jspdf';
 
 // ── Initial empty form state ────────────────────────────────
@@ -73,9 +74,19 @@ const App: React.FC = () => {
   const [formData, setFormData] = useState<PrescriptionFormData>(getInitialFormData());
   const [showPreview, setShowPreview] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [physicians, setPhysicians] = useState<Physician[]>([]);
+  const [physiciansLoading, setPhysiciansLoading] = useState(true);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchPhysicians().then((data) => {
+      setPhysicians(data);
+      setPhysiciansLoading(false);
+    });
+  }, []);
 
   // Look up the currently selected physician
-  const selectedPhysician = PHYSICIANS.find((p) => p.id === formData.physicianId);
+  const selectedPhysician = physicians.find((p) => p.id === formData.physicianId);
 
   // ── Handlers ─────────────────────────────────────────────
   const handleChange = (field: keyof PrescriptionFormData, value: string) => {
@@ -116,9 +127,20 @@ const App: React.FC = () => {
   // Uses html2canvas to capture the preview modal content,
   // then jsPDF to create a downloadable PDF file.
   const handleGeneratePDF = async () => {
+    // Save to Supabase first
+    setIsGenerating(true);
+    try {
+      await savePrescription(formData, formData.physicianId);
+      setToastMessage('Saved to Supabase');
+      setTimeout(() => setToastMessage(null), 3000);
+    } catch (err) {
+      console.error('Supabase save error:', err);
+      setToastMessage('Save failed');
+      setTimeout(() => setToastMessage(null), 3000);
+    }
+
     // First make sure preview is open so the content is in the DOM
     setShowPreview(true);
-    setIsGenerating(true);
 
     // Wait for React to render the preview
     await new Promise((r) => setTimeout(r, 300));
@@ -197,10 +219,30 @@ const App: React.FC = () => {
   return (
     <div className="app-container">
 
+      {toastMessage && (
+        <div style={{
+          position: 'fixed',
+          top: '20px',
+          right: '20px',
+          padding: '12px 24px',
+          background: toastMessage === 'Save failed' ? '#ef4444' : '#22c55e',
+          color: 'white',
+          borderRadius: '6px',
+          zIndex: 9999,
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          fontWeight: 500,
+          fontFamily: 'inherit'
+        }}>
+          {toastMessage}
+        </div>
+      )}
+
       {/* ── 1. Physician selector header (dark navy) ── */}
       <PhysicianHeader
         physicianId={formData.physicianId}
         onChange={handleChange}
+        physicians={physicians}
+        physiciansLoading={physiciansLoading}
       />
 
       {/* ── 2. Prescription document header card ── */}

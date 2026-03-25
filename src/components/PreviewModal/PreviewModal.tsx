@@ -268,20 +268,11 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
         {/* ══════════ HB+ LOGO — BOTTOM RIGHT ══════════ */}
         <div className="pv-logo-footer">
           <div className="pv-logo-block">
-            <svg viewBox="0 0 140 60" width="100" height="42" xmlns="http://www.w3.org/2000/svg">
-              {/* H */}
-              <rect x="5" y="3" width="8" height="54" fill="#1a1a1a"/>
-              <rect x="5" y="26" width="32" height="8" fill="#1a1a1a"/>
-              <rect x="30" y="3" width="8" height="54" fill="#1a1a1a"/>
-              {/* B top */}
-              <rect x="30" y="3" width="40" height="8" fill="#1a1a1a"/>
-              <rect x="30" y="26" width="40" height="8" fill="#1a1a1a"/>
-              <rect x="30" y="49" width="40" height="8" fill="#1a1a1a"/>
-              <rect x="65" y="3" width="8" height="54" fill="#1a1a1a"/>
-              {/* + */}
-              <rect x="86" y="16" width="5" height="24" fill="#b94a2c"/>
-              <rect x="76" y="25" width="24" height="5" fill="#b94a2c"/>
-            </svg>
+            <img 
+              src="/hb-logo.svg" 
+              alt="HB+" 
+              style={{ width: '50px', height: '50px', objectFit: 'contain', mixBlendMode: 'multiply' }} 
+            />
             <span className="pv-logo-text">HB+ Prescription</span>
           </div>
         </div>

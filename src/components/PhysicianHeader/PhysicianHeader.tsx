@@ -17,22 +17,23 @@
 
 import React, { useState } from 'react';
 import './PhysicianHeader.css';
-import { PHYSICIANS } from '../../data/physicians';
-import type { PrescriptionFormData } from '../../types/prescription';
+import type { PrescriptionFormData, Physician } from '../../types/prescription';
 
 interface PhysicianHeaderProps {
   /** Currently selected physician id (from form state) */
   physicianId: string;
   /** Generic field change handler passed from parent App component */
   onChange: (field: keyof PrescriptionFormData, value: string) => void;
+  physicians: Physician[];
+  physiciansLoading: boolean;
 }
 
-const PhysicianHeader: React.FC<PhysicianHeaderProps> = ({ physicianId, onChange }) => {
+const PhysicianHeader: React.FC<PhysicianHeaderProps> = ({ physicianId, onChange, physicians, physiciansLoading }) => {
   // Controls whether the three field columns are visible or hidden
   const [collapsed, setCollapsed] = useState(false);
 
   // Look up the selected physician to auto-fill the readonly fields
-  const selected = PHYSICIANS.find((p) => p.id === physicianId);
+  const selected = physicians.find((p) => p.id === physicianId);
 
   return (
     // Single flex row: title | [fields] | collapse-btn
@@ -60,12 +61,18 @@ const PhysicianHeader: React.FC<PhysicianHeaderProps> = ({ physicianId, onChange
               value={physicianId}
               onChange={(e) => onChange('physicianId', e.target.value)}
             >
-              <option value="">Select physician</option>
-              {PHYSICIANS.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.name}
-                </option>
-              ))}
+              {physiciansLoading ? (
+                <option value="">Loading...</option>
+              ) : (
+                <>
+                  <option value="">Select physician</option>
+                  {physicians.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.name}
+                    </option>
+                  ))}
+                </>
+              )}
             </select>
           </div>
 
