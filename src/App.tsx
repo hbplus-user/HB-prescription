@@ -46,21 +46,20 @@ const getInitialFormData = (): PrescriptionFormData => {
       strengthConditioning: { checked: false, sessionsPerWeek: '', extra1: '' },
       yogaMobility: { checked: false, sessionsPerWeek: '', extra1: '', format: '' },
       physiotherapy: { checked: false, sessionsPerWeek: '', extra1: '', focusArea: '' },
-      cardiovascular: { checked: false, sessionsPerWeek: '', extra1: '', maxHR: '' },
-      mentalWellness: { checked: false, sessionsPerWeek: '', extra1: '', phq2: '', gad2: '' },
+      mentalWellness: { checked: false, sessionsPerWeek: '', extra1: '' },
       nutritionProgramme: {
         checked: false,
         sessionsPerWeek: '',
         extra1: '',
         approach: '',
-        protein: '',
-        caloric: '',
       },
     },
     trainingContraindications: '',
     target1: '',
     target2: '',
-    target3: '',
+    target90_1: '',
+    target90_2: '',
+    target90_3: '',
     redFlags: '',
     physicianSignatureFile: null,
     date: dateStr,
@@ -366,12 +365,32 @@ const App: React.FC = () => {
       {/* ── 10. 30-Day Measurable Targets ── */}
       <div className="card">
         <span className="field-label">
-          30-Day Measurable Targets (3 specific outcomes with values)
+          30-Day Measurable Targets (2 specific outcomes with values)
         </span>
         <div className="field-row" style={{ marginTop: '12px' }}>
-          {(['target1', 'target2', 'target3'] as const).map((t, i) => (
+          {(['target1', 'target2'] as const).map((t, i) => (
             <div className="field-group" key={t} style={{ flex: 1 }}>
-              <span className="field-label" style={{ fontSize: '10px' }}>Target {i + 1}</span>
+              <span className="field-label" style={{ fontSize: '10px' }}>Goal {i + 1}</span>
+              <input
+                type="text"
+                className="full-width"
+                value={formData[t]}
+                onChange={(e) => handleChange(t, e.target.value)}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── 10.5. 90-Day Measurable Targets ── */}
+      <div className="card">
+        <span className="field-label">
+          90-Day Measurable Targets (3 specific outcomes with values)
+        </span>
+        <div className="field-row" style={{ marginTop: '12px' }}>
+          {(['target90_1', 'target90_2', 'target90_3'] as const).map((t, i) => (
+            <div className="field-group" key={t} style={{ flex: 1 }}>
+              <span className="field-label" style={{ fontSize: '10px' }}>Goal {i + 1}</span>
               <input
                 type="text"
                 className="full-width"

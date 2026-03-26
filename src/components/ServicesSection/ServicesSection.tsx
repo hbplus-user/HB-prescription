@@ -134,30 +134,6 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ services, onChange })
         </div>
       </div>
 
-      {/* ── 4. Cardiovascular Conditioning ── */}
-      <div className="service-row">
-        <input
-          type="checkbox"
-          className="service-row__checkbox"
-          checked={services.cardiovascular.checked}
-          onChange={(e) => onChange('cardiovascular', 'checked', e.target.checked)}
-        />
-        <span className="service-row__name">Cardiovascular Conditioning</span>
-        <div className="service-row__fields">
-          <ServiceField
-            label="Sessions/week:"
-            value={services.cardiovascular.sessionsPerWeek}
-            onChange={(v) => onChange('cardiovascular', 'sessionsPerWeek', v)}
-          />
-          <ServiceField
-            label="Max HR cap:"
-            value={services.cardiovascular.maxHR}
-            onChange={(v) => onChange('cardiovascular', 'maxHR', v)}
-          />
-          <span className="service-row__unit">bpm</span>
-        </div>
-      </div>
-
       {/* ── 5. Mental Wellness Sessions ── */}
       <div className="service-row">
         <input
@@ -169,19 +145,9 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ services, onChange })
         <span className="service-row__name">Mental Wellness Sessions</span>
         <div className="service-row__fields">
           <ServiceField
-            label="Sessions/week:"
+            label="Sessions/month:"
             value={services.mentalWellness.sessionsPerWeek}
             onChange={(v) => onChange('mentalWellness', 'sessionsPerWeek', v)}
-          />
-          <ServiceField
-            label="PHQ-2:"
-            value={services.mentalWellness.phq2}
-            onChange={(v) => onChange('mentalWellness', 'phq2', v)}
-          />
-          <ServiceField
-            label="GAD-2:"
-            value={services.mentalWellness.gad2}
-            onChange={(v) => onChange('mentalWellness', 'gad2', v)}
           />
         </div>
       </div>
@@ -195,23 +161,14 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({ services, onChange })
           onChange={(e) => onChange('nutritionProgramme', 'checked', e.target.checked)}
         />
         <span className="service-row__name">Nutrition Programme Direction</span>
-        <div className="service-row__fields">
-          <ServiceField
-            label="Approach:"
+        <div className="service-row__fields" style={{ flex: 1, display: 'flex' }}>
+          <label style={{ marginRight: '8px' }}>Approach:</label>
+          <input
+            type="text"
+            className="service-row__large-input"
+            style={{ flex: 1 }}
             value={services.nutritionProgramme.approach}
-            onChange={(v) => onChange('nutritionProgramme', 'approach', v)}
-            size="medium"
-          />
-          <ServiceField
-            label="Protein:"
-            value={services.nutritionProgramme.protein}
-            onChange={(v) => onChange('nutritionProgramme', 'protein', v)}
-          />
-          <span className="service-row__unit">g/kg</span>
-          <ServiceField
-            label="Caloric:"
-            value={services.nutritionProgramme.caloric}
-            onChange={(v) => onChange('nutritionProgramme', 'caloric', v)}
+            onChange={(e) => onChange('nutritionProgramme', 'approach', e.target.value)}
           />
         </div>
       </div>

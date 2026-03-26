@@ -52,18 +52,19 @@ export interface PrescriptionFormData {
     strengthConditioning: PrescribedService;
     yogaMobility: PrescribedService & { format: string };
     physiotherapy: PrescribedService & { focusArea: string };
-    cardiovascular: PrescribedService & { maxHR: string };
-    mentalWellness: PrescribedService & { phq2: string; gad2: string };
-    nutritionProgramme: PrescribedService & { approach: string; protein: string; caloric: string };
+    mentalWellness: PrescribedService;
+    nutritionProgramme: PrescribedService & { approach: string };
   };
 
   // --- Contraindications ---
   trainingContraindications: string;
 
-  // --- 30-Day Targets ---
+  // --- 30-Day and 90-Day Targets ---
   target1: string;
   target2: string;
-  target3: string;
+  target90_1: string;
+  target90_2: string;
+  target90_3: string;
 
   // --- Red Flags ---
   redFlags: string;

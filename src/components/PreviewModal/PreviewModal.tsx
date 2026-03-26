@@ -57,22 +57,16 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
       details: `${s.physiotherapy.sessionsPerWeek || '—'} sessions/wk · Focus: ${s.physiotherapy.focusArea || '—'}`,
     });
   }
-  if (s.cardiovascular.checked) {
-    checkedServices.push({
-      name: 'Cardiovascular Conditioning',
-      details: `${s.cardiovascular.sessionsPerWeek || '—'} sessions/wk · Max HR: ${s.cardiovascular.maxHR || '—'} bpm`,
-    });
-  }
   if (s.mentalWellness.checked) {
     checkedServices.push({
       name: 'Mental Wellness Sessions',
-      details: `${s.mentalWellness.sessionsPerWeek || '—'} sessions/wk · PHQ-2: ${s.mentalWellness.phq2 || '—'} · GAD-2: ${s.mentalWellness.gad2 || '—'}`,
+      details: `${s.mentalWellness.sessionsPerWeek || '—'} sessions/month`,
     });
   }
   if (s.nutritionProgramme.checked) {
     checkedServices.push({
       name: 'Nutrition Programme Direction',
-      details: `Approach: ${s.nutritionProgramme.approach || '—'} · Protein: ${s.nutritionProgramme.protein || '—'} g/kg · Caloric: ${s.nutritionProgramme.caloric || '—'}`,
+      details: `Approach: ${s.nutritionProgramme.approach || '—'}`,
     });
   }
 
@@ -213,16 +207,29 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
         <p className="pv-targets-title">30-Day Measurable Targets</p>
         <div className="pv-targets">
           <div className="pv-target-col">
-            <div className="lbl">Target 1</div>
+            <div className="lbl">Goal 1</div>
             <div className="val">{formData.target1 || '—'}</div>
           </div>
           <div className="pv-target-col">
-            <div className="lbl">Target 2</div>
+            <div className="lbl">Goal 2</div>
             <div className="val">{formData.target2 || '—'}</div>
           </div>
+        </div>
+
+        {/* ══════════ 90-DAY TARGETS ══════════ */}
+        <p className="pv-targets-title">90-Day Measurable Targets</p>
+        <div className="pv-targets">
           <div className="pv-target-col">
-            <div className="lbl">Target 3</div>
-            <div className="val">{formData.target3 || '—'}</div>
+            <div className="lbl">Goal 1</div>
+            <div className="val">{formData.target90_1 || '—'}</div>
+          </div>
+          <div className="pv-target-col">
+            <div className="lbl">Goal 2</div>
+            <div className="val">{formData.target90_2 || '—'}</div>
+          </div>
+          <div className="pv-target-col">
+            <div className="lbl">Goal 3</div>
+            <div className="val">{formData.target90_3 || '—'}</div>
           </div>
         </div>
 
