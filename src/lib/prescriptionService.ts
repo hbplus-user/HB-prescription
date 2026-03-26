@@ -38,7 +38,9 @@ export const savePrescription = async (formData: PrescriptionFormData, physician
     training_contraindications: formData.trainingContraindications,
     target1: formData.target1,
     target2: formData.target2,
-    target3: formData.target3,
+    target90_1: formData.target90_1,
+    target90_2: formData.target90_2,
+    target90_3: formData.target90_3,
     red_flags: formData.redFlags,
     client_acknowledgement: formData.clientAcknowledgement
   };
