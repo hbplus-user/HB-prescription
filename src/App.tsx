@@ -81,6 +81,11 @@ const App: React.FC = () => {
     fetchPhysicians().then((data) => {
       setPhysicians(data);
       setPhysiciansLoading(false);
+    }).catch(err => {
+      console.error('Failed to load physicians globally:', err);
+      setPhysiciansLoading(false);
+      setToastMessage('Authentication or network error: Check API keys');
+      setTimeout(() => setToastMessage(null), 5000);
     });
   }, []);
 

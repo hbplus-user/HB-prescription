@@ -2,23 +2,28 @@ import { supabase } from './supabase';
 import type { Physician, PrescriptionFormData } from '../types/prescription';
 
 export const fetchPhysicians = async (): Promise<Physician[]> => {
-  const { data, error } = await supabase
-    .from('physicians')
-    .select('*');
+  try {
+    const { data, error } = await supabase
+      .from('physicians')
+      .select('*');
 
-  if (error) {
-    console.error('Error fetching physicians:', error);
-    return [];
-  }
+    if (error) {
+      console.error('Error fetching physicians:', error);
+      return [];
+    }
 
-  // Map from snake_case DB to camelCase type
-  return (data || []).map((row) => ({
+    // Map from snake_case DB to camelCase type
+    return (data || []).map((row) => ({
     id: row.id,
     name: row.name,
     regNumber: row.reg_number,
     specialisation: row.specialisation,
     signature: row.signature_url,
   }));
+  } catch (err) {
+    console.error('Exception in fetchPhysicians:', err);
+    throw err;
+  }
 };
 
 export const savePrescription = async (formData: PrescriptionFormData, physicianId: string): Promise<void> => {
