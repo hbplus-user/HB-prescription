@@ -19,6 +19,7 @@ import ChiefComplaint from './components/ChiefComplaint/ChiefComplaint';
 import ServicesSection from './components/ServicesSection/ServicesSection';
 import AuthorizationSection from './components/AuthorizationSection/AuthorizationSection';
 import PreviewModal from './components/PreviewModal/PreviewModal';
+import MultiSelect from './components/MultiSelect/MultiSelect';
 import { PRIMARY_CONDITIONS } from './data/physicians';
 import html2canvas from 'html2canvas';
 import { fetchPhysicians, savePrescription } from './lib/prescriptionService';
@@ -38,7 +39,7 @@ const getInitialFormData = (): PrescriptionFormData => {
     age: '',
     gender: '',
     chiefComplaints: [''],
-    AnyCondition: '',
+    AnyCondition: [],
     AnyConditionNotes: '',
     keyBloodFlags: '',
     medicationsCurrentlyOn: [''],
@@ -63,7 +64,6 @@ const getInitialFormData = (): PrescriptionFormData => {
     redFlags: '',
     physicianSignatureFile: null,
     date: dateStr,
-    clientAcknowledgement: '',
   };
 };
 
@@ -93,7 +93,7 @@ const App: React.FC = () => {
   const selectedPhysician = physicians.find((p) => p.id === formData.physicianId);
 
   // ── Handlers ─────────────────────────────────────────────
-  const handleChange = (field: keyof PrescriptionFormData, value: string) => {
+  const handleChange = (field: keyof PrescriptionFormData, value: string | string[]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -137,10 +137,10 @@ const App: React.FC = () => {
       await savePrescription(formData, formData.physicianId);
       setToastMessage('Saved to Supabase');
       setTimeout(() => setToastMessage(null), 3000);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Supabase save error:', err);
-      setToastMessage('Save failed');
-      setTimeout(() => setToastMessage(null), 3000);
+      setToastMessage(`Save failed: ${err.message || 'Check database columns'}`);
+      setTimeout(() => setToastMessage(null), 5000);
     }
 
     // First make sure preview is open so the content is in the DOM
@@ -157,45 +157,81 @@ const App: React.FC = () => {
     }
 
     try {
-      // Hide the action buttons and close button before capture
-      const closeBtn = element.querySelector('.preview-close') as HTMLElement;
-      const actionBar = element.querySelector('.preview-actions') as HTMLElement;
-      if (closeBtn) closeBtn.style.display = 'none';
-      if (actionBar) actionBar.style.display = 'none';
+      // Add print mode class for a fixed A4-style layout during capture
+      element.classList.add('pdf-print-mode');
+      
+      // Wait for layout to reflow
+      await new Promise(resolve => setTimeout(resolve, 150));
 
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: '#ffffff',
-        logging: false,
-      });
-
-      // Restore hidden elements
-      if (closeBtn) closeBtn.style.display = '';
-      if (actionBar) actionBar.style.display = '';
-
-      // Calculate PDF dimensions (A4)
-      const imgWidth = 210; // A4 width in mm
-      const pageHeight = 297; // A4 height in mm
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
+      const sections = Array.from(element.querySelectorAll('.pdf-section')) as HTMLElement[];
       const pdf = new jsPDF('p', 'mm', 'a4');
-      let position = 0;
+      const pageWidth = 210;
+      const pageHeight = 297;
+      const margin = 10;
+      const contentWidth = pageWidth - (margin * 2);
+      const pageCapacity = pageHeight - (margin * 2);
 
-      // Handle multi-page if content is taller than one page
-      if (imgHeight <= pageHeight) {
-        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, imgWidth, imgHeight);
-      } else {
-        let remainingHeight = imgHeight;
-        while (remainingHeight > 0) {
-          pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
-          remainingHeight -= pageHeight;
-          position -= pageHeight;
-          if (remainingHeight > 0) {
+      let currentY = margin;
+
+      for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
+        const canvas = await html2canvas(section, {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#f5f1ea',
+          logging: false,
+          width: section.offsetWidth || 774,
+        });
+
+        const imgWidth = contentWidth;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        // If this section is too tall for current page space
+        if (currentY + imgHeight > pageHeight - margin) {
+          // If it fits on a fresh page, move it there
+          if (imgHeight <= pageCapacity) {
             pdf.addPage();
+            currentY = margin;
+          } else {
+            // Section is taller than a whole page (e.g. huge table), slice it
+            let sectionRemainingHeight = imgHeight;
+            let sectionSrcY = 0;
+            const pxPerPage = (canvas.width * pageCapacity) / contentWidth;
+
+            while (sectionRemainingHeight > 0) {
+              const chunkCanvas = document.createElement('canvas');
+              chunkCanvas.width = canvas.width;
+              chunkCanvas.height = Math.min(pxPerPage, (canvas.height - sectionSrcY));
+              
+              const ctx = chunkCanvas.getContext('2d');
+              if (ctx) {
+                ctx.drawImage(canvas, 0, sectionSrcY, canvas.width, chunkCanvas.height, 0, 0, canvas.width, chunkCanvas.height);
+              }
+
+              const chunkImgHeight = (chunkCanvas.height * contentWidth) / chunkCanvas.width;
+              
+              if (currentY + chunkImgHeight > pageHeight - margin) {
+                pdf.addPage();
+                currentY = margin;
+              }
+
+              pdf.addImage(chunkCanvas.toDataURL('image/png'), 'PNG', margin, currentY, contentWidth, chunkImgHeight);
+              
+              sectionRemainingHeight -= chunkImgHeight;
+              sectionSrcY += pxPerPage;
+              currentY += chunkImgHeight;
+            }
+            continue;
           }
         }
+
+        const imgData = canvas.toDataURL('image/png');
+        pdf.addImage(imgData, 'PNG', margin, currentY, imgWidth, imgHeight);
+        currentY += imgHeight + 4; // 4mm gap between sections
       }
+
+      // Remove print mode class
+      element.classList.remove('pdf-print-mode');
 
       // Generate filename with consultation number and date
       const filename = `HB+_Prescription_${formData.consultationNumber || 'draft'}_${formData.date || 'undated'}.pdf`;
@@ -306,16 +342,12 @@ const App: React.FC = () => {
       {/* ── 5. Primary Condition / Goal ── */}
       <div className="card">
         <span className="field-label">Any conditions</span>
-        <select
-          className="full-width"
-          value={formData.AnyCondition}
-          onChange={(e) => handleChange('AnyCondition', e.target.value)}
-        >
-          <option value="">Select condition...</option>
-          {PRIMARY_CONDITIONS.map((cond) => (
-            <option key={cond} value={cond}>{cond}</option>
-          ))}
-        </select>
+        <MultiSelect
+          options={PRIMARY_CONDITIONS}
+          selectedValues={formData.AnyCondition}
+          onChange={(values) => handleChange('AnyCondition', values)}
+          placeholder="Select conditions..."
+        />
         <textarea
           className="full-width"
           style={{ marginTop: '12px' }}
@@ -422,7 +454,6 @@ const App: React.FC = () => {
         <AuthorizationSection
           physicianSignature={selectedPhysician?.signature}
           date={formData.date}
-          clientAcknowledgement={formData.clientAcknowledgement}
           onChange={handleChange}
         />
       </div>

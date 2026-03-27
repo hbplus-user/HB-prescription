@@ -9,12 +9,11 @@
 /* ── Main row: 3 evenly-spaced columns ── */
 .authorization-section__row {
   display: flex;
-  gap: 24px;
-  margin-top: 16px;
+  gap: 32px;
+  margin-top: 20px;
   align-items: flex-start;
 }
 
-/* Each column takes equal space */
 .authorization-section__col {
   display: flex;
   flex-direction: column;
@@ -23,19 +22,13 @@
   min-width: 0;
 }
 
-/* Column labels */
 .authorization-section__col-label {
-  font-weight: 600;
-  font-size: 13px;
-  color: #1a1a1a;
-}
-
-.authorization-section__col-label--orange {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #b94a2c;
+  color: var(--accent-red);
+  margin-bottom: 4px;
 }
 
 /* Container for the signature area */
@@ -74,24 +67,6 @@
   color: #444;
   width: 100%;
   box-sizing: border-box;
-}
-
-/* Signature line for client acknowledgement */
-.authorization-section__signature-line {
-  border-bottom: 1.5px solid #888;
-  padding-bottom: 4px;
-  min-height: 30px;
-  display: flex;
-  align-items: flex-end;
-}
-
-.authorization-section__signature-input {
-  border: none !important;
-  background: transparent !important;
-  outline: none;
-  width: 100%;
-  font-size: 15px;
-  padding: 2px 0;
 }
 
 /* Disclaimer text at the very bottom */

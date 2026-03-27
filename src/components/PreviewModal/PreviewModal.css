@@ -90,7 +90,7 @@
 }
 
 .pv-card--dark {
-  background: #2c3e50;
+  background: #243342; /* Slightly softer than pure dark blue */
   border-color: #3d5166;
   border-left-color: #f0c080;
   color: #e0e8f0;
@@ -141,6 +141,10 @@
 .pv-field .val {
   color: #1a1a1a;
   font-size: 13px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  min-width: 0;
 }
 
 .pv-card--dark .pv-field .val {
@@ -233,9 +237,9 @@
    ═══════════════════════════════════════════════════════════ */
 .pv-auth {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-end;
-  gap: 24px;
+  gap: 60px;
   margin-bottom: 20px;
   padding-top: 12px;
   border-top: 1px solid #e0d9cf;
@@ -244,9 +248,7 @@
 .pv-auth-col {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 6px;
-  flex: 1;
 }
 
 .pv-auth-col .lbl {
@@ -267,12 +269,6 @@
   height: 50px;
   width: 140px;
   object-fit: contain;
-}
-
-.pv-ack-line {
-  border-bottom: 1px solid #888;
-  min-width: 140px;
-  height: 20px;
 }
 
 /* ── Disclaimer ── */
@@ -309,12 +305,23 @@
   color: #888;
 }
 
-/* ── Action bar ── */
-.preview-actions {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 20px;
-  padding-top: 14px;
-  border-top: 1px solid #e0d9cf;
+/* ── PDF Print Mode — used for html2canvas capture ── */
+.pdf-print-mode {
+  width: 794px !important; /* A4 at 96dpi */
+  max-width: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 40px !important;
+  background: #f5f1ea !important;
 }
+
+.pdf-print-mode .preview-close,
+.pdf-print-mode .preview-actions {
+  display: none !important;
+}
+
+.pdf-print-mode .pv-card {
+  box-shadow: none !important;
+}
+

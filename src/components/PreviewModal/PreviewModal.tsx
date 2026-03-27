@@ -76,13 +76,13 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
         <button className="preview-close" onClick={onClose} title="Close preview">✕</button>
 
         {/* ══════════ HEADER ══════════ */}
-        <div className="preview-header">
+        <div className="preview-header pdf-section">
           <h1>HB+ Wellness Prescription</h1>
           <p>HaSel Health and Wellness Pvt Ltd · info@hbplus.fit · +91 7848094954</p>
         </div>
 
         {/* ══════════ PRESCRIBING PHYSICIAN ══════════ */}
-        <div className="pv-card">
+        <div className="pv-card pdf-section">
           <p className="pv-card-title">Prescribing Physician</p>
           <div className="pv-row">
             <div className="pv-field pv-field--half">
@@ -107,7 +107,7 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
         </div>
 
         {/* ══════════ CLIENT DETAILS ══════════ */}
-        <div className="pv-card">
+        <div className="pv-card pdf-section">
           <p className="pv-card-title">Client Details</p>
           <div className="pv-row">
             <div className="pv-field pv-field--half">
@@ -123,7 +123,7 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
 
         {/* ══════════ CHIEF COMPLAINT ══════════ */}
         {formData.chiefComplaints.some(c => c.trim()) && (
-          <div className="pv-card">
+          <div className="pv-card pdf-section">
             <p className="pv-card-title">Chief Complaint</p>
             <ol className="pv-list">
               {formData.chiefComplaints.filter(c => c.trim()).map((c, i) => (
@@ -134,10 +134,10 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
         )}
 
         {/* ══════════ ANY CONDITIONS ══════════ */}
-        <div className="pv-card">
-          <p className="pv-card-title">Any conditions</p>
+        <div className="pv-card pdf-section">
+          <span className="lbl">Any conditions</span>
           <div className="pv-field">
-            <span className="val">{formData.AnyCondition || '—'}</span>
+            <span className="val">{formData.AnyCondition.length > 0 ? formData.AnyCondition.join(', ') : '—'}</span>
           </div>
           {formData.AnyConditionNotes && (
             <div className="pv-field" style={{ marginTop: '4px' }}>
@@ -147,7 +147,7 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
         </div>
 
         {/* ══════════ KEY BLOOD FLAGS ══════════ */}
-        <div className="pv-card">
+        <div className="pv-card pdf-section">
           <p className="pv-card-title">Key Blood Flags (with values)</p>
           <div className="pv-field">
             <span className="val" style={{ whiteSpace: 'pre-wrap' }}>{formData.keyBloodFlags || '—'}</span>
@@ -155,7 +155,7 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
         </div>
 
         {/* ══════════ MEDICATIONS ══════════ */}
-        <div className="pv-card">
+        <div className="pv-card pdf-section">
           <p className="pv-card-title">Medications Currently On</p>
           {formData.medicationsCurrentlyOn.some(m => m.trim()) ? (
             <ol className="pv-list">
@@ -172,7 +172,7 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
 
         {/* ══════════ SERVICES ══════════ */}
         {checkedServices.length > 0 && (
-          <div className="pv-card">
+          <div className="pv-card pdf-section">
             <p className="pv-card-title">HB+ Services Prescribed</p>
             <table className="pv-table">
               <thead>
@@ -195,7 +195,7 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
 
         {/* ══════════ CONTRAINDICATIONS (dark card) ══════════ */}
         {formData.trainingContraindications && (
-          <div className="pv-card pv-card--dark">
+          <div className="pv-card pv-card--dark pdf-section">
             <p className="pv-card-title">Training Contraindications / Red Flags to Coach</p>
             <div className="pv-field">
               <span className="val" style={{ whiteSpace: 'pre-wrap' }}>{formData.trainingContraindications}</span>
@@ -204,38 +204,42 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
         )}
 
         {/* ══════════ 30-DAY TARGETS ══════════ */}
-        <p className="pv-targets-title">30-Day Measurable Targets</p>
-        <div className="pv-targets">
-          <div className="pv-target-col">
-            <div className="lbl">Goal 1</div>
-            <div className="val">{formData.target1 || '—'}</div>
-          </div>
-          <div className="pv-target-col">
-            <div className="lbl">Goal 2</div>
-            <div className="val">{formData.target2 || '—'}</div>
+        <div className="pdf-section">
+          <p className="pv-targets-title">30-Day Measurable Targets</p>
+          <div className="pv-targets">
+            <div className="pv-target-col">
+              <div className="lbl">Goal 1</div>
+              <div className="val">{formData.target1 || '—'}</div>
+            </div>
+            <div className="pv-target-col">
+              <div className="lbl">Goal 2</div>
+              <div className="val">{formData.target2 || '—'}</div>
+            </div>
           </div>
         </div>
 
         {/* ══════════ 90-DAY TARGETS ══════════ */}
-        <p className="pv-targets-title">90-Day Measurable Targets</p>
-        <div className="pv-targets">
-          <div className="pv-target-col">
-            <div className="lbl">Goal 1</div>
-            <div className="val">{formData.target90_1 || '—'}</div>
-          </div>
-          <div className="pv-target-col">
-            <div className="lbl">Goal 2</div>
-            <div className="val">{formData.target90_2 || '—'}</div>
-          </div>
-          <div className="pv-target-col">
-            <div className="lbl">Goal 3</div>
-            <div className="val">{formData.target90_3 || '—'}</div>
+        <div className="pdf-section">
+          <p className="pv-targets-title">90-Day Measurable Targets</p>
+          <div className="pv-targets">
+            <div className="pv-target-col">
+              <div className="lbl">Goal 1</div>
+              <div className="val">{formData.target90_1 || '—'}</div>
+            </div>
+            <div className="pv-target-col">
+              <div className="lbl">Goal 2</div>
+              <div className="val">{formData.target90_2 || '—'}</div>
+            </div>
+            <div className="pv-target-col">
+              <div className="lbl">Goal 3</div>
+              <div className="val">{formData.target90_3 || '—'}</div>
+            </div>
           </div>
         </div>
 
         {/* ══════════ RED FLAGS ══════════ */}
         {formData.redFlags && (
-          <div className="pv-card">
+          <div className="pv-card pdf-section">
             <p className="pv-card-title">Red Flags — Contact GP / HB+ Team Immediately If</p>
             <div className="pv-field">
               <span className="val" style={{ whiteSpace: 'pre-wrap' }}>{formData.redFlags}</span>
@@ -244,7 +248,7 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
         )}
 
         {/* ══════════ AUTHORIZATION ══════════ */}
-        <div className="pv-auth">
+        <div className="pv-auth pdf-section">
           <div className="pv-auth-col">
             <span className="lbl">Physician Signature</span>
             {physician?.signature ? (
@@ -257,28 +261,22 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
             <span className="lbl">Date</span>
             <span className="val">{formData.date || '—'}</span>
           </div>
-          <div className="pv-auth-col">
-            <span className="lbl">Client Acknowledgement</span>
-            <div className="pv-ack-line">
-              <span className="val">{formData.clientAcknowledgement || ''}</span>
-            </div>
-          </div>
         </div>
 
         {/* ══════════ DISCLAIMER ══════════ */}
-        <p className="pv-disclaimer">
+        <p className="pv-disclaimer pdf-section">
           This prescription is issued as part of the HB+ wellness programme. It is a lifestyle medicine
           recommendation and does not replace conventional medical treatment. For emergencies, contact a
           qualified physician or emergency services.
         </p>
 
         {/* ══════════ HB+ LOGO — BOTTOM RIGHT ══════════ */}
-        <div className="pv-logo-footer">
+        <div className="pv-logo-footer pdf-section">
           <div className="pv-logo-block">
             <img 
               src="/hb-logo.svg" 
               alt="HB+" 
-              style={{ width: '50px', height: '50px', objectFit: 'contain', mixBlendMode: 'multiply' }} 
+              style={{ width: '50px', height: '50px', objectFit: 'contain' }} 
             />
             <span className="pv-logo-text">HB+ Prescription</span>
           </div>

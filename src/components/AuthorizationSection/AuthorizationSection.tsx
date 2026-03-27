@@ -14,14 +14,12 @@ interface AuthorizationSectionProps {
   /** Auto-filled signature image URL from the selected physician */
   physicianSignature?: string;
   date: string;
-  clientAcknowledgement: string;
   onChange: (field: keyof PrescriptionFormData, value: string) => void;
 }
 
 const AuthorizationSection: React.FC<AuthorizationSectionProps> = ({
   physicianSignature,
   date,
-  clientAcknowledgement,
   onChange,
 }) => {
   return (
@@ -56,22 +54,6 @@ const AuthorizationSection: React.FC<AuthorizationSectionProps> = ({
             value={date}
             onChange={(e) => onChange('date', e.target.value)}
           />
-        </div>
-
-        {/* ─── Client Acknowledgement column ─── */}
-        <div className="authorization-section__col">
-          <p className="authorization-section__col-label authorization-section__col-label--orange">
-            Client Acknowledgement
-          </p>
-          <div className="authorization-section__signature-line">
-            <input
-              type="text"
-              className="authorization-section__signature-input"
-              value={clientAcknowledgement}
-              onChange={(e) => onChange('clientAcknowledgement', e.target.value)}
-              placeholder=""
-            />
-          </div>
         </div>
       </div>
 

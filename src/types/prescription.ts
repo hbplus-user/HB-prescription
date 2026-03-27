@@ -40,7 +40,7 @@ export interface PrescriptionFormData {
   chiefComplaints: string[];
 
   // --- Any conditions ---
-  AnyCondition: string;
+  AnyCondition: string[];
   AnyConditionNotes: string;
 
   // --- Clinical Details ---
@@ -72,5 +72,4 @@ export interface PrescriptionFormData {
   // --- Authorization ---
   physicianSignatureFile: File | null;
   date: string;
-  clientAcknowledgement: string;
 }
