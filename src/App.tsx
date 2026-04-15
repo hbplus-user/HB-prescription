@@ -36,6 +36,7 @@ const getInitialFormData = (): PrescriptionFormData => {
     physicianId: '',
     consultationNumber: '',
     clientName: '',
+    uhid: '',
     age: '',
     gender: '',
     chiefComplaints: [''],
@@ -304,6 +305,16 @@ const App: React.FC = () => {
           />
         </div>
         <div className="field-row" style={{ marginTop: '20px' }}>
+          <div className="field-group" style={{ flex: 1 }}>
+            <span className="field-label">UHID</span>
+            <input
+              type="text"
+              className="full-width"
+              value={formData.uhid}
+              placeholder="Enter UHID"
+              onChange={(e) => handleChange('uhid', e.target.value)}
+            />
+          </div>
           <div className="field-group" style={{ flex: 1 }}>
             <span className="field-label">Age</span>
             <input

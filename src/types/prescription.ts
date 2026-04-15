@@ -33,6 +33,7 @@ export interface PrescriptionFormData {
 
   // --- Patient Info ---
   clientName: string;
+  uhid: string;
   age: string;
   gender: string;
 

@@ -32,6 +32,7 @@ export const savePrescription = async (formData: PrescriptionFormData, physician
     date: formData.date,
     physician_id: physicianId || null,
     client_name: formData.clientName,
+    uhid: formData.uhid,
     age: formData.age,
     gender: formData.gender,
     chief_complaints: formData.chiefComplaints,

@@ -115,6 +115,12 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
               <span className="val">{formData.clientName || '—'}</span>
             </div>
             <div className="pv-field pv-field--half">
+              <span className="lbl">UHID:</span>
+              <span className="val">{formData.uhid || '—'}</span>
+            </div>
+          </div>
+          <div className="pv-row">
+            <div className="pv-field pv-field--half">
               <span className="lbl">Age / Gender:</span>
               <span className="val">{formData.age || '—'} / {formData.gender || '—'}</span>
             </div>
